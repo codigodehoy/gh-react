@@ -9,6 +9,7 @@ on:
     secrets:
       envPAT:
         required: true
+        type: string
 
 jobs:
   reusable_workflow_job:
