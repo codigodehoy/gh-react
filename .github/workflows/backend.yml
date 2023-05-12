@@ -19,11 +19,12 @@ jobs:
         with:
           config-path: configure.js
 
-  call-workflow-passing-data:
-      - name: Pass Data
-        uses: ./.github/workflows/reuse.yml
-        with:
-          envPAT: 23654
+  call-workflow-2-in-local-repo:
+    uses: ./.github/workflows/reuse.yml
+    with:
+      config-path: configure.js
+    secrets:
+      envPAT: example
 
       # - name: Configure AWS credentials
       #   uses: aws-actions/configure-aws-credentials@v1
