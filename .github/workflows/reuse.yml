@@ -1,0 +1,25 @@
+name: TEST
+
+on:
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+    secrets:
+      envPAT:
+        required: true
+
+jobs:
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Show data
+        run: |
+          echo ${{ inputs.config-path }}
+          echo ${{ secrets.envPAT}}
+      # with:
+      #   repo-token: ${{ secrets.envPAT }}
+      #   configuration-path: ${{ inputs.config-path }}
