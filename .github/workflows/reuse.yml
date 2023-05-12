@@ -6,9 +6,9 @@ on:
       config-path:
         required: true
         type: string
-    # secrets:
-    #   envPAT:
-    #     required: true
+    secrets:
+      envPAT:
+        required: true
 
 jobs:
   reusable_workflow_job:
