@@ -18,13 +18,13 @@ jobs:
         uses: ./.github/workflows/reuse.yml
         with:
           config-path: configure.js
-
+          
   call-workflow-2-in-local-repo:
     uses: ./.github/workflows/reuse.yml
     with:
       config-path: configure.js
     secrets:
-      envPAT: example
+      envPAT: ${{ secrets.envPAT }}
 
       # - name: Configure AWS credentials
       #   uses: aws-actions/configure-aws-credentials@v1
