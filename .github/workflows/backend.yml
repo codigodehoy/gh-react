@@ -19,6 +19,7 @@ jobs:
         with:
           config-path: configure.js
 
+  call-workflow-passing-data:
       - name: Pass Data
         uses: ./.github/workflows/reuse.yml
         with:
