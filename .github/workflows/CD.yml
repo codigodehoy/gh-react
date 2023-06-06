@@ -19,16 +19,21 @@ jobs:
     environment: production
 
     steps:
+      
+
+      - uses: little-core-labs/get-git-tag@v3.0.1
+        id: tagName
+        with:
+          tagRegex: "foobar-(.*)"  # Optional. Returns specified group text as tag name. Full tag string is returned if regex is not defined.
+          tagRegexGroup: 1 # Optional. Default is 1.
+    
+
       - name: Show information
         run: |
           echo ${{ inputs.config-path }}
           echo ${{ secrets.envPAT}}
-
-      - name: Determine Environment
-        id: extract_environment
-        run: |
-          starts_with_qa=$(startsWith(${{github.ref}}, 'refs/tags/qa'))
-          echo "Ref starts with 'refs/tags/qa': $starts_with_qa"
+          echo ${{ steps.tagName.outputs.tag }}
+ 
 
 
       # with:
