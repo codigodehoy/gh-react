@@ -27,9 +27,9 @@ jobs:
       - name: Determine Environment
         id: extract_environment
         run: |
-          TAG_NAME="${{ inputs.environment }}"
-          ENVIRONMENT="${TAG_NAME##*-}"
-          echo "::set-output name=environment::${ENVIRONMENT}"
+          starts_with_qa=$(startsWith(github.ref, 'refs/tags/qa'))
+          echo "Ref starts with 'refs/tags/qa': $starts_with_qa"
+
 
       # with:
       #   repo-token: ${{ secrets.envPAT }}
