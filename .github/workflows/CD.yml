@@ -27,7 +27,7 @@ jobs:
       - name: Determine Environment
         id: extract_environment
         run: |
-          starts_with_qa=$(startsWith(github.ref, 'refs/tags/qa'))
+          starts_with_qa=$(startsWith(${{github.ref}}, 'refs/tags/qa'))
           echo "Ref starts with 'refs/tags/qa': $starts_with_qa"
 
 
