@@ -23,7 +23,13 @@ jobs:
         run: |
           echo ${{ inputs.config-path }}
           echo ${{ secrets.envPAT}}
-          echo ${{ inputs.environment }}
+
+      - name: Determine Environment
+        id: extract_environment
+        run: |
+          TAG_NAME="${{ inputs.environment }}"
+          ENVIRONMENT="${TAG_NAME##*-}"
+          echo "::set-output name=environment::${ENVIRONMENT}"
 
       # with:
       #   repo-token: ${{ secrets.envPAT }}
