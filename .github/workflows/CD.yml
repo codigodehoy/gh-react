@@ -19,7 +19,7 @@ jobs:
     environment: production
 
     steps:
-      - name: Show data
+      - name: Show information
         run: |
           echo ${{ inputs.config-path }}
           echo ${{ secrets.envPAT}}
