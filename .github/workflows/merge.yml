@@ -1,6 +1,10 @@
 name: Backend CD
 
-on: [push]
+on: 
+  push:
+    tags:
+      - "v[1-9].[0-9].[0-9]-(qa|stg|prod)"
+
 
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -14,10 +18,11 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
           
-  call-workflow-2-in-local-repo:
-    uses: ./.github/workflows/reuse.yml
+  CD:
+    uses: ./.github/workflows/CD.yml
     with:
       config-path: configure.js
+      environment: ${{ github.event.ref }}
     secrets:
       envPAT: ${{ secrets.envPAT }}
 

@@ -1,4 +1,4 @@
-name: TEST
+name: CD
 
 on:
   workflow_call:
@@ -6,12 +6,15 @@ on:
       config-path:
         required: true
         type: string
+      environment:
+        required: false
+        type: string
     secrets:
       envPAT:
         required: true
 
 jobs:
-  reusable_workflow_job:
+  CD:
     runs-on: ubuntu-latest
     environment: production
 
@@ -20,6 +23,8 @@ jobs:
         run: |
           echo ${{ inputs.config-path }}
           echo ${{ secrets.envPAT}}
+          echo ${{ inputs.environment }}
+
       # with:
       #   repo-token: ${{ secrets.envPAT }}
       #   configuration-path: ${{ inputs.config-path }}
