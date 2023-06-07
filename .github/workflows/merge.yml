@@ -13,26 +13,27 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
-      
+
+  CD:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
       - name: Run Script
         id: script
         run: |
           tag=$(echo "${{ github.ref }}" | awk -F"-" '{print $NF}')
           echo "result=$tag" >> $GITHUB_ENV
-  CD:
-    uses: ./.github/workflows/CD.yml
-    with:
-      config-path: configure.js
-      environment: ${{ env.result }}
-    secrets:
-      envPAT: ${{ secrets.envPAT }}
+  
+      - name: Deploy to environment
+        uses: ./.github/workflows/CD.yml
+        with:
+          config-path: configure.js
+          environment: ${{ env.result }}
 
 
-      
 
       # - name: Configure AWS credentials
       #   uses: aws-actions/configure-aws-credentials@v1
