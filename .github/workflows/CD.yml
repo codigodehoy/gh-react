@@ -19,22 +19,12 @@ jobs:
     environment: production
 
     steps:
-      - name: Run Script
-        id: script
-        run: |
-          tag=$(echo "${{ github.ref }}" | awk -F"-" '{print $NF}')
-          echo "result=$tag" >> $GITHUB_ENV
-
-      - name: Print Result
-        run: |
-          result_value=${{ env.result }}
-          echo "Result: $result_value"
-
+  
       - name: Show information
         run: |
           echo ${{ inputs.config-path }}
           echo ${{ secrets.envPAT}}
-          echo ${{ steps.tagName.outputs.tag }}
+          echo ${{ inputs.environment }}
  
 
 

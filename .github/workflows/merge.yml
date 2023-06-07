@@ -17,14 +17,22 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
-          
+      
+      - name: Run Script
+        id: script
+        run: |
+          tag=$(echo "${{ github.ref }}" | awk -F"-" '{print $NF}')
+          echo "result=$tag" >> $GITHUB_ENV
   CD:
     uses: ./.github/workflows/CD.yml
     with:
       config-path: configure.js
-      environment: ${{ github.event.ref }}
+      environment: ${{ env.result }}
     secrets:
       envPAT: ${{ secrets.envPAT }}
+
+
+      
 
       # - name: Configure AWS credentials
       #   uses: aws-actions/configure-aws-credentials@v1
