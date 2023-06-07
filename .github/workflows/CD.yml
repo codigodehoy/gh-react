@@ -22,7 +22,7 @@ jobs:
       - name: Run Script
         id: script
         run: |
-          tag=${{ github.event.ref }}
+          tag=$(node -e 'const cadena = process.env.GITHUB_REF; console.log(cadena.substring(7, 9));')
           echo "result=$tag" >> $GITHUB_OUTPUT
 
 
