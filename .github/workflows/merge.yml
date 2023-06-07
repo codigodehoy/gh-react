@@ -11,7 +11,7 @@ permissions:
   contents: read # This is required for actions/checkout
 
 jobs:
-  build:
+  merge:
     runs-on: ubuntu-latest
     outputs:
       result: ${{ steps.script.outputs.result }}
@@ -27,11 +27,11 @@ jobs:
           echo "result=$tag" >> $GITHUB_OUTPUT
 
   CD:
-    needs: [build]
+    needs: [merge]
     uses: ./.github/workflows/CD.yml
     with:
       config-path: configure.js
-      deploy_env: ${{ needs.build.outputs.result }}
+      deploy_env: ${{ needs.merge.outputs.result }}
     secrets:
       envPAT: ${{ secrets.envPAT }}
 
