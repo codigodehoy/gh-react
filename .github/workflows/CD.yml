@@ -22,7 +22,7 @@ jobs:
       - name: Run Script
         id: script
         run: |
-          tag=process.env.GITHUB_REF
+          tag=${{ github.event.ref }}
           echo "result=$tag" >> $GITHUB_OUTPUT
 
 
