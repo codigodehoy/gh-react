@@ -13,6 +13,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.script.outputs.result }}
 
     steps:
       - name: Checkout 🛎️
@@ -29,7 +31,7 @@ jobs:
     uses: ./.github/workflows/CD.yml
     with:
       config-path: configure.js
-      environment: ${{ needs.build.outputs.result }}
+      deploy_env: ${{ needs.build.outputs.result }}
     secrets:
       envPAT: ${{ secrets.envPAT }}
 

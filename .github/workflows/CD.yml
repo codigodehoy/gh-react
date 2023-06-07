@@ -6,7 +6,7 @@ on:
       config-path:
         required: true
         type: string
-      environment:
+      deploy_env:
         required: false
         type: string
     secrets:
@@ -24,7 +24,7 @@ jobs:
         run: |
           echo ${{ inputs.config-path }}
           echo ${{ secrets.envPAT}}
-          echo ${{ inputs.environment }}
+          echo ${{ inputs.deploy_env }}
  
 
 
