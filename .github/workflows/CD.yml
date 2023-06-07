@@ -22,9 +22,9 @@ jobs:
       - name: Run Script
         id: script
         run: |
-          const cadena = process.env.GITHUB_REF
-          const value = cadena.substring(7, 9))
-          echo "result=$value" >> $GITHUB_OUTPUT
+          tag=process.env.GITHUB_REF
+          echo "result=$tag" >> $GITHUB_OUTPUT
+
 
       - name: Print Result
         run: |
