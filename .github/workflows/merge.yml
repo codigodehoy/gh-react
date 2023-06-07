@@ -17,7 +17,7 @@ jobs:
       result: ${{ steps.script.outputs.result }}
 
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout 
         uses: actions/checkout@v3
       
       - name: Run Script
