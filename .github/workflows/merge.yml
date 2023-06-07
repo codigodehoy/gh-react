@@ -17,7 +17,7 @@ jobs:
       result: ${{ steps.script.outputs.result }}
 
     steps:
-      - name: Checkout 
+      - name: Checkout 🛎️
         uses: actions/checkout@v3
       
       - name: Run Script
@@ -26,12 +26,16 @@ jobs:
           tag=$(echo "${{ github.ref }}" | awk -F"-" '{print $NF}')
           echo "result=$tag" >> $GITHUB_OUTPUT
 
-  CD:
+  CI:
     needs: [merge]
+    uses: ./.github/workflows/CI.yml
+
+  CD:
+    needs: [merge, CI]
     uses: ./.github/workflows/CD.yml
     with:
       config-path: configure.js
-      deploy_env: ${{ needs.merge.outputs.result }}
+      deploy-env: ${{ needs.merge.outputs.result }}
     secrets:
       envPAT: ${{ secrets.envPAT }}
 
