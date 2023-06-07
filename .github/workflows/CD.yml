@@ -22,13 +22,13 @@ jobs:
       - name: Run Script
         id: script
         run: |
-          tag=$(node -e 'const cadena = ${{ github.event.ref }}; console.log(cadena.substring(7, 9));')
-          echo "result=$tag" >> $GITHUB_OUTPUT
+          tag=$(echo "${{ github.ref }}" | sed 's/^v[0-9]\+\.[0-9]\+\.[0-9]\+-//')
+          echo "result=$tag" >> $GITHUB_ENV
 
       - name: Print Result
         run: |
-          result_value=${{ steps.script.outputs.result }}
-          echo "Result:$result_value"
+          result_value=${{ env.result }}
+          echo "Result: $result_value"
 
       - name: Show information
         run: |
