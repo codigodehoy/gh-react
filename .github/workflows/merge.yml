@@ -11,7 +11,7 @@ permissions:
   contents: read # This is required for actions/checkout
 
 jobs:
-  build:
+  merge:
     runs-on: ubuntu-latest
     outputs:
       result: ${{ steps.script.outputs.result }}
